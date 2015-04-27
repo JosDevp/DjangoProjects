@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+<head>
+ <title>  {% block title %} {% endblock %}   </title>
+  <link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>  
+  <link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/> 
+  <link rel="stylesheet" type="text/css" href="/media/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/>   
+  <script type="text/javascript" src="/media/bootstrap/js/bootstrap.js"></script> 
+  <script type="text/javascript" src="/media/bootstrap/js/bootstrap.min.js"></script>   
+  <script type="text/javascript" src="/media/js/jquery.js"></script>
+  <script src="/media/bootstrap/js/bootstrap-dropdown.js"></script>
+  <script src="/media/js/jquery.form.min.js"></script>
+  <script src="/media/js/demo.js"></script>
+  <link rel="shortcut icon" href="/media/image/HP-Finder.png">
+
+
+  <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #B8860B;
+        background-color: #000;background-image:url("/media/image/puentetampico.jpg");
+         
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      .hero-unit{
+    background-color: #F5F5DC; 
+      }
+      .well{
+        background-color: #F5FFFA;
+      }
+     
+
+      .pie
+{
+  background: #151515;
+  min-height: 110px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.i1
+{
+  margin-left: 130px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+.i2
+{
+  margin-left: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.i3
+{
+  margin-left: 50px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.i4
+{
+  margin-right: 150px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+#parrafo
+{
+  float: right;
+  color: white;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 0px;
+}
+
+#parrafo1
+{
+  float: right;
+  color: white;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 80px;
+}
+
+#parrafo2
+{
+  float: right;
+  color: white;
+  font-size: 12px;
+  margin-right: 100px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#parrafo3
+{
+  float: right;
+  color: white;
+  font-size: 12px;
+  margin-right: 200px;
+  margin-top: -40px;
+  margin-bottom: 10px;
+}
+
+
+
+ 
+    </style>
+
+    <script type="text/javascript">
+        $(document).on('ready',function(){
+              $.ajax({
+                  type:"GET",
+                  contentType:"application/json; charset=utf-8",
+                  dateType:"json",
+                  url:"/ws/empleados/",
+                  success:function(response){
+                          var i = (response.length-1)-2;
+                          for(i;i<=(response.length-1);i++){
+                              $('#EmpleadosNuevos').append("<li>"+response[i].fields.nombre+"</li>");
+                          }    
+                  }
+              });
+        });
+    </script>
+
+</head>
+
+<body>
+  <img src="/media/image/gu.png" width="100px"/>
+
+  
+  
+
+   <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="brand" href="{%  url 'vista_principal' %}">@rgusBemusoft</a>
+
+          {% if user.is_authenticated %}
+              <p class="navbar-text pull-right">
+                 Usuario {{user.username}}
+                 
+              </p>
+
+         {% endif %}
+          <div class="nav-collapse collapse">
+                        
+            <ul class="nav">
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Registro Internos</li>
+                  <li><a href=" #">Interno</a></li>
+                  <li><a href="/institucion/page/2">Institucion</a></li>
+                  <li><a href="#">Situacion</a></li>
+                  <li><a href=" #">Modalidad</a></li>
+                  <li><a href=" #">Pocision</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Registros</li>
+                  <li><a href=" #">Delito</a></li>
+                  <li><a href=" #">Fuero</a></li>
+                  <li><a href="#">Clasificacion</a></li>
+                  <li><a href=" #">Situacion Penal</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mantenimiento<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Mantenimien</li>
+                  <li><a href=" /empleado/page/1  ">Empleado</a></li>
+                  
+                </ul>
+              </li>
+
+                <li><A HREF=" {% url 'vista_servicio' %} ">Servicios</A></li>
+                 <li><A HREF=" {% url 'vista_proyecto' %} ">Proyectos</A></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Herramientas</li>
+                  <li><a href="https://github.com/JosDevp">GitHub</a></li>
+                  <li><a href="https://twitter.com/JoseGpeHdez ">Twitter</a></li>
+                  <li><a href="https://plus.google.com/u/0/105527933256136378525/posts">Gmail</a></li>
+                  
+                </ul>
+              </li>
+
+               
+              
+              <li><a href=" {% url 'vista_contacto'  %} "><i class="icon-envelope"></i>Contacto</a></li>
+              <li><a href=" {% url 'vista_about' %} "><i class="icon-star"></i> About</a></li>
+              
+              {% if user.is_authenticated %}
+              <li><a href=" {% url 'vista_logout' %} ">Cerrar sesion</a></li>
+              {% else %}
+              <li><a href="{% url 'vista_login' %} ">Login</a></li>
+              {% endif %}
+              
+
+               
+               
+              
+
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <!-- <div class="navbar-inner">
+        
+         <a class="brand"  href="{% url "vista_principal" %}">Inicio</a>
+
+         {% if user.is_authenticated %}
+              <p class="navbar-text pull-right">
+                 Usuario {{user.username}}
+              </p>
+
+         {% endif %}
+         <ul class="nav">
+                  <li> <a HREF=" /empleado/page/1/ ">Empleados</a></li>
+                <li><a HREF=" {% url 'vista_contacto' %} ">Contacto</a></li>
+                <li><a HREF=" {% url 'vista_about' %} ">Acerca De...</a></li>
+
+                  {% if user.is_authenticated %}
+                   <li><a HREF=" {% url 'vista_logout' %} ">Cerrar sesion</a></li>
+                  {% else %}
+                  <li><a HREF=" {%  url 'vista_login' %} ">Login</a></li>
+                  {% endif %}
+
+         </ul>
+    </div>
+  </div>-->
+<br>
+
+
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+      <div class="hero-unit">
+        {% block content %}
+
+       {% endblock %}
+
+      </div>
+    </div>
+    
+
+  <br>
+
+  <div class="span3">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header">Mi perfil</li>
+        <p align="justify">
+
+                {% if user.is_authenticated %}
+                <img class="img-polaroid" src="{{get_image_profile}} " width="50px" height="50px"/>
+
+                 <p>Bienvenido {{user.username}} </p>
+
+                  {% else %}
+                  <A HREF="/login/" class="btn btn-primary">Iniciar Session</A>
+
+ 
+              {% endif %}
+
+        </p>
+      </ul>
+
+    </div>
+    
+
+     <div class="well sidebar-nav">
+            <ul class="nav nav-list text-success" id="EmpleadosNuevos" >
+              <li class="nav-header">Nuevos Empleados</li>
+              
+            </ul>
+      </div><!--/.well -->
+
+
+  </div>
+ 
+</div>
+<!--<footer>
+<p>&copy; Open Project 2014. Version Django: {{django_version}}</p> 
+</footer>-->
+
+
+
+  
+</div>
+
+<footer class="footer">
+    <div class="row-fluid pie">
+        <div class="span3 pie">
+          <img class="i1"width='25px' height='3px' src="{{MEDIA_URL}}image/im2.jpg" ALIGN=MIDDLE>
+          <address>
+         <strong>Freelancer, @argusBemus.</strong><br>
+        Jose Guadaluper Hernandez, Programmer<br>
+        <br>
+         <abbr title="Phone">P:</abbr> (833)7784-474888
+      </address>
+        </div>
+        <div class="span3 pie">
+          <img class="i2"width='25px' height='3px' src="{{MEDIA_URL}}image/im1.jpg" ALIGN=MIDDLE><p id="parrafo">
+          <p id="parrafo1"><strong>Call</strong><br> <abbr title="Phone">P:</abbr> (833)7784-474888
+        </div>
+        <div class="span3 pie">
+          <img class="i3" width='40px' height='40px' src="{{MEDIA_URL}}image/im3.jpg" ALIGN=MIDDLE>
+          <address>
+        <strong>Contact</strong><br>
+        <a href="mailto:#">josegpe7hdez@gmail.com</a>
+        <p>Version Django {{django_version}} </p>
+      </address>
+          
+        </div>
+        <div class="span3 pie">
+          <img class="i4" width='30px' height='40px' src="{{MEDIA_URL}}image/im4.jpg" ALIGN=top>
+          <address>
+         <strong>Inc, @argusBemus.</strong><br>
+          00 Universidad Ave, Tampico<br>
+        Tamaulipas, Mexico 674<br>
+         <abbr title="Phone">P:</abbr> (833)7784-474888
+      </address>
+        </div>
+    </div>
+
+  </footer>
+    
+
+  
+
+</body>
+</html>

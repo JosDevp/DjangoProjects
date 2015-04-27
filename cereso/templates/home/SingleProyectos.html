@@ -1,0 +1,30 @@
+{% extends 'base3.html' %}
+{% block title %} Proyectos {{proyecto.nombre}} {% endblock  %}
+
+
+{%  block content %}
+  
+    
+    <ul class="thumbnails">
+    <li class="span9">
+    <div class="thumbnail">
+      <h3><center> <p class="text-info"> {{proyecto.nombre}} </p></center></h3>
+     <img class="img-polaroid" src="/media/{{proyecto.imagen}}  " width="400px" heigth="200px"/>
+     <hr>
+      
+      <center><p class="text-info">  {{proyecto.descripcion}} </p></center>
+      <hr>
+      <p class="text-warning"><strong>Link de Descarga:</strong></p><p class="text-info"> <A HREF={{proyecto.link}} >{{proyecto.link}}</A></p>
+
+    </div>
+  </li>
+</ul>
+
+
+
+
+  <br>
+  <br>
+  <a class="btn btn-primary" href="javascript:window.history.go(-1) ">Regresar Lista de Proyectos</a>
+
+	{% endblock  %}

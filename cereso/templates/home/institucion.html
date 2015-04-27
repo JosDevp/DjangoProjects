@@ -1,0 +1,100 @@
+{% extends 'base3.html' %}
+{% block title %} Instucion {% endblock  %}
+
+
+{%  block content %}
+
+
+<!--IniciaModal-->
+ <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <h3 id="myModalLabel">Eliminar Institucion</h3>
+    </div>
+    <div class="modal-body">
+    <p>¿Realmente desea eliminar La Institucion<span id="modal_name"></span>?</p>
+    </div>
+    <div class="modal-footer">
+        <form method="post" id="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto" name="product_id">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+<!--EndModal-->
+
+
+
+	<center><span class="badge badge-success">Lista Institucion</span></center>
+	<br>
+	<hr>
+	{% if user.is_authenticated %}
+	<A class="btn btn-primary" HREF=" {% url 'vista_agregar_institucion' %} ">Agregar Nuevo</A>
+	{% endif %}  
+	<br>
+    
+	
+	<hr>
+
+	{% if instituciones %}
+
+    <table class="table table-condensed " id="tabla_productos">
+    	<thead>
+                <tr class="info">
+                  <th>Descripcion</th>
+                  
+                </tr>
+        </thead>
+
+	   {%  for i in instituciones %}
+	   <tbody>
+	   	<tr class="info">
+	      <tr id="tr{{i.id}}">
+				<td>{{ i.descripcion }}</td>
+				
+				<td><a class="btn btn-info" href="/institucion/{{i.id}}/"><i class="icon-search"></i>   Ver</a></td>
+
+				{% if user.is_authenticated %}
+				   <td><a class="btn btn-info" href="/edit/institucion/{{i.id}}/"><i class="icon-pencil"></i>   Editar</a></td>
+
+
+
+				   <td><a class="btn btn-danger delete"  href="#myModal" role="button"  data-toggle="modal" id="{{i.id}}" data-name="{{i.descripcion}}"><i class="icon-trash icon-white"></i>Eliminar</a></td>
+				{% endif %}
+
+	       {% endfor %}
+	       </tr>
+	       </tbody>
+	   </table>
+
+	    {% else %}
+	       <h2> No existen Instituciones #(-_-)#</h2>
+
+	{% endif %} 
+
+	<br><br>
+{% if instituciones %}
+    <div class="pagination pagination-centered pagination-large">
+    <ul>
+		<li><a href="/institucion/page/1"> << </a></li>
+	{% if instituciones.has_previous %}
+		<li><a href="/institucion/page/{{instituciones.previous_page_number }}/"> Prev </a></li>
+	{% else %}
+		<li><a href="#"> Prev </a></li>
+	{% endif %}
+	{% if instituciones.has_next %}
+		<li><a href="/institucion/page/{{instituciones.next_page_number }}/"> Next </a></li>
+	{% else %}
+		<li><a href="#"> Next </a></li>
+	{% endif %}
+		<li><a href="/institucion/page/{{instituciones.paginator.num_pages }} "> >> </a><li>
+	</ul>
+	</div>
+	<br><br>
+	<center><span class="badge badge-info"> Pagina {{ instituciones.number }} de {{ instituciones.paginator.num_pages }}</span></center>
+{% endif %}
+
+	
+
+	{% endblock  %}

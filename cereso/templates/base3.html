@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %} {% endblock%} </title>
+    <!-- Le styles -->
+    <link href="/media/bootstrap/css/bootstrap.css" rel="stylesheet">
+     <link href="/media/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script src="/media/js/jquery.js"></script>
+    <script src="/media/js/jquery.form.min.js"></script>
+    <script src="/media/js/demo.js"></script>
+    <script src="/media/bootstrap/js/bootstrap.js"></script>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #B8860B;
+        background-color: #000;background-image:url("/media/image/puentetampico.jpg");
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .hero-unit{
+    background-color: #F5F5DC; 
+      }
+      .well{
+        background-color: #F5FFFA;
+      }
+     
+    </style>
+    <script type="text/javascript">
+        $(document).on('ready',function(){
+              $.ajax({
+                  type:"GET",
+                  contentType:"application/json; charset=utf-8",
+                  dateType:"json",
+                  url:"/ws/empleados/",
+                  success:function(response){
+                          var i = (response.length-1)-2;
+                          for(i;i<=(response.length-1);i++){
+                              $('#EmpleadosNuevos').append("<li>"+response[i].fields.nombre+"</li>");
+                          }    
+                  }
+              });
+        });
+    </script>
+  </head>
+  <body>
+
+
+
+   <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="brand" href="{%  url 'vista_principal' %}">@rgusBemusoft</a>
+
+          {% if user.is_authenticated %}
+              <p class="navbar-text pull-right">
+                 Usuario {{user.username}}
+                 
+              </p>
+
+         {% endif %}
+          <div class="nav-collapse collapse">
+                        
+            <ul class="nav">
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Registro Internos</li>
+                  <li><a href=" #">Interno</a></li>
+                  <li><a href="/institucion/page/2">Institucion</a></li>
+                  <li><a href="#">Situacion</a></li>
+                  <li><a href=" #">Modalidad</a></li>
+                  <li><a href=" #">Pocision</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Registros</li>
+                  <li><a href=" #">Delito</a></li>
+                  <li><a href=" #">Fuero</a></li>
+                  <li><a href="#">Clasificacion</a></li>
+                  <li><a href=" #">Situacion Penal</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mantenimiento<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Mantenimien</li>
+                  <li><a href=" /empleado/page/1  ">Empleado</a></li>
+                  
+                </ul>
+              </li>
+
+                <li><A HREF=" {% url 'vista_servicio' %} ">Servicios</A></li>
+                  <li><A HREF=" /proyecto/page/3 ">Proyectos</A></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Herramientas<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Herramientas</li>
+                  <li><a href="https://github.com/JosDevp">GitHub</a></li>
+                  <li><a href="https://twitter.com/JoseGpeHdez ">Twitter</a></li>
+                  <li><a href="https://plus.google.com/u/0/105527933256136378525/posts">Gmail</a></li>
+                  
+                </ul>
+              </li>
+
+               
+              
+              <li><a href=" {% url 'vista_contacto'  %} "><i class="icon-envelope"></i>Contacto</a></li>
+              <li><a href=" {% url 'vista_about' %} "><i class="icon-star"></i> About</a></li>
+              
+              {% if user.is_authenticated %}
+              <li><a href=" {% url 'vista_logout' %} ">Cerrar sesion</a></li>
+              {% else %}
+              <li><a href="{% url 'vista_login' %} ">Login</a></li>
+              {% endif %}
+              
+
+               
+               
+              
+
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <div class="hero-unit">
+            {% block content %}
+            {% endblock%}
+          </div>
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Mi perfil</li>
+              <br><p align="justify">
+              {%if user.is_authenticated %}
+                <p>Bienvenido {{ user }} </p>
+                <img src="{{get_image_profile}}" width="50px" heigth="50px"/>
+              {% else %}
+                <a href="/login/" class="btn btn-primary">Iniciar Sesion<a>
+              {% endif %}
+              </p>
+            </ul>
+          </div><!--/.well -->
+          
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list text-success" id="EmpleadosNuevos">
+              <li class="nav-header">Nuevos Productos</li>
+              
+            </ul>
+          </div><!--/.well -->
+
+          <!-- botones me gusta-->
+          <div id='pageshare' class='hidden-phone'>
+<div class='sbutton' id='gplusone'>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<g:plusone size="tall"></g:plusone> </div>
+<div class='sbutton' id='fbshare'>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-like" data-width="40" data-layout="box_count" data-show-faces="true" data-send="true"></div>
+</div>
+</div>
+<!-- Fin botones-->
+
+
+           
+        </div><!--/span-->
+      </div><!--/row-->
+      <hr>
+      <footer>
+       <marquee> <p>&copy; Open Project 2014. Versión Django: {{django_version}}</p> </marquee>
+
+        <div class="span4">
+     <address>
+         <p class="text-success"><strong>Inc, @argusBemus.</strong><br>
+          00 Universidad Ave, Tampico<br>
+        Tamaulipas, Mexico 674<br>
+         <abbr title="Phone">P:</abbr> (833)7784-474888</p>
+      </address>
+     
+      </div>
+      <div class="span4">
+             <address>
+    <strong>E-mail</strong><br>
+    <i class="icon-thumbs-up"></i> <a href="mailto:#">josegpe7hdez@gmail.com</a>
+    </address>
+      </div>
+   <div class="span4">
+     <address>
+       <p class="text-info">  <strong>Freelancer, @argusBemus.</strong><br>
+        Jose Guadaluper Hernandez, Programmer<br>
+        <br>
+         <abbr title="Phone">P:</abbr> (833)7784-474888</p>
+      </address>
+   </div>
+    
+      </footer>
+    </div><!--/.fluid-container-->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

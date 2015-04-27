@@ -1,0 +1,30 @@
+{% extends 'base3.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<center><h2> <font color="black">Registro de Usuarios</font></h2></center>
+ <center><h4> <font color="white"><small>Si aun no tienes cuenta! <cite title="Jose Guadalupe">
+ 	"Que esperas ? Registrate y observa nuestros productos"</cite></small></font></h4></center>
+
+ <form action="." method="POST">
+    {% csrf_token %}
+
+    {{ mensaje }}
+
+    {{form.as_p}}
+    {% if next %}
+		<input type="hidden" value="{{next}}" name="next">
+	{% else %}
+		<input type="hidden" value="/" name="next">
+	{% endif %}
+
+
+   	<button class="btn btn-primary" type="submit"> Login </button>
+
+</form>
+
+<h4>Registrate <a href="/registro/">Aquí</a> </h4>
+
+{% endblock %}
+

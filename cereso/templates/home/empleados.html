@@ -1,0 +1,103 @@
+{% extends 'base3.html' %}
+{% block title %} Empleados {% endblock  %}
+
+
+{%  block content %}
+
+  <!--IniciaModal-->
+ <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <h3 id="myModalLabel">Eliminar Empleado</h3>
+    </div>
+    <div class="modal-body">
+    <p>¿Realmente desea eliminar el Empleado <span id="modal_name"></span>?</p>
+    </div>
+    <div class="modal-footer">
+        <form method="post" id="frmEliminar">
+            {% csrf_token %}
+            <input type="hidden" id="modal_idProducto" name="product_id">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+    </div>
+</div>
+<!--EndModal-->
+
+
+
+
+
+	<center><span class="badge badge-success">Lista Empleados</span></center>
+	<br>
+	<hr>
+	{% if user.is_authenticated %}
+	<A class="btn btn-primary" HREF=" {% url 'vista_agregar_empleado' %} ">Agregar Nuevo</A>
+	{% endif %}  
+	<br>
+	
+	<hr>
+
+	{% if empleados %}
+
+    <table class="table table-condensed " id="tabla_productos">
+    	<thead>
+                <tr class="info">
+                  <th>Nombre</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
+                </tr>
+        </thead>
+
+	   {%  for e in empleados %}
+	   <tbody>
+	   	<tr class="info">
+	      <tr id="tr{{e.id}}">
+				<td> <p class="text-info">{{ e.nombre }}</p></td>
+				<td><p class="text-info">{{ e.apellidop }}</p></td>
+				<td> <p class="text-info">{{ e.apellidom }}</p></td>
+				<td><a class="btn btn-info" href="/empleado/{{e.id}}/"><i class="icon-search"></i>   Ver</a></td>
+
+				{% if user.is_authenticated and user.is_staff %}
+				   <td><a class="btn btn-info" href="/edit/empleado/{{e.id}}/"><i class="icon-pencil"></i>   Editar</a></td>
+				   
+
+				   <td><a class="btn btn-danger delete"  href="#myModal" role="button"  data-toggle="modal" id="{{e.id}}" data-name="{{e.nombre}}"><i class="icon-trash icon-white"></i>Eliminar</a></td>
+
+
+				{% endif %}
+
+	       {% endfor %}
+	       </tr>
+	       </tbody>
+	   </table>
+
+	    {% else %}
+	       <h2> No existen empleados #(-_-)#</h2>
+
+	{% endif %} 
+
+	<br><br>
+{% if empleados %}
+    <div class="pagination pagination-centered pagination-large">
+    <ul>
+		<li><a href="/empleado/page/1"> << </a></li>
+	{% if empleados.has_previous %}
+		<li><a href="/empleado/page/{{empleados.previous_page_number }}/"> Prev </a></li>
+	{% else %}
+		<li><a href="#"> Prev </a></li>
+	{% endif %}
+	{% if empleados.has_next %}
+		<li><a href="/empleado/page/{{empleados.next_page_number }}/"> Next </a></li>
+	{% else %}
+		<li><a href="#"> Next </a></li>
+	{% endif %}
+		<li><a href="/empleado/page/{{empleados.paginator.num_pages }} "> >> </a><li>
+	</ul>
+	</div>
+	<br><br>
+	<center><span class="badge badge-info"> Pagina {{ empleados.number }} de {{ empleados.paginator.num_pages }}</span></center>
+{% endif %}
+
+	
+
+	{% endblock  %}

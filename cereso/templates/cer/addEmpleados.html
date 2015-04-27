@@ -1,0 +1,26 @@
+{% extends 'base3.html' %}
+
+{% block title%} Agregar Empleado {% endblock %}
+
+  {% block content %} 
+
+	<p class="text-success"><center><span class="badge badge-warning">1</span><h4><marquee>Agregar Empleado.</marquee></h4></center></p>
+	<hr>
+
+<form action="." method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="btn btn-primary" type="submit"> Grabar </button>
+	<button class="btn btn-primary" type="submit"> Limpiar </button>
+
+</form>
+<hr>
+<span class="badge badge-warning">{{informacion}}</span>
+<br>
+<hr>
+
+
+<a class="submit"  href="javascript:window.history.go(-1) ">Regresar Lista de Empleados</a>
+
+	
+{% endblock %}

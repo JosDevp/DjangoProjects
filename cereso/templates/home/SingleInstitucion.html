@@ -1,0 +1,16 @@
+{% extends 'base3.html' %}
+{% block title %} Instituciones {% endblock  %}
+
+
+{%  block content %}
+   <h2><p align="center" class="text-info"> Lista Instituciones </p></h2>
+	<span class="label label-success">Instituciones:</span> 
+	<h6> <p class="text-info"> {{institucion.descripcion}}</p> </h6>
+	
+
+
+  <br>
+  <br>
+  <a class="btn btn-primary" href="javascript:window.history.go(-1) ">Regresar Lista de Instituciones</a>
+
+	{% endblock  %}

@@ -1,0 +1,24 @@
+{% extends 'base3.html' %}
+
+{% block title%} Agregar Institucion {% endblock %}
+
+  {% block content %} 
+
+	<H2> Lista agregar Institucion</H2>
+
+<form action="." method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="btn btn-primary" type="submit"> Grabar </button>
+	<button class="btn btn-primary" type="submit"> Limpiar </button>
+
+</form>
+{{informacion}}
+<br>
+<hr>
+
+
+<a class="submit"  href="javascript:window.history.go(-1) ">Regresar Lista de Institucion</a>
+
+	
+{% endblock %}

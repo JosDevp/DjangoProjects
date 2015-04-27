@@ -1,0 +1,75 @@
+{% extends 'base3.html' %}
+{% block title %} Proyectos {% endblock  %}
+
+
+{%  block content %}
+
+
+
+ 
+	<center><span class="badge badge-success">Lista Proyectos</span></center>
+	<br>
+	<hr>
+	
+
+	{% if proyectos %}
+
+    <table class="table table-condensed " id="tabla_productos">
+    	<thead>
+                <tr class="info">
+                  <th>Nombre</th>
+                  <th>Link</th>
+                 
+                </tr>
+        </thead>
+
+	   {%  for e in proyectos %}
+	   <tbody>
+	   	<tr class="info">
+	      <tr id="tr{{e.id}}">
+				<td> <p class="text-info">{{ e.nombre }}</p></td>
+				<td><p class="text-info">{{ e.link }}</p></td>
+				
+				<td><a class="btn btn-info" href="/proyecto/{{e.id}}/"><i class="icon-search"></i>   Ver</a></td>
+
+			
+
+	       {% endfor %}
+	       </tr>
+	       </tbody>
+	   </table>
+
+	    {% else %}
+	       <h2> No existen Proyectos #(-_-)#</h2>
+
+	{% endif %} 
+
+	<br><br>
+{% if proyectos %}
+    <div class="pagination pagination-centered pagination-large">
+    <ul>
+		<li><a href="/proyecto/page/1"> << </a></li>
+	{% if proyectos.has_previous %}
+		<li><a href="/proyecto/page/{{proyectos.previous_page_number }}/"> Prev </a></li>
+	{% else %}
+		<li><a href="#"> Prev </a></li>
+	{% endif %}
+	{% if proyectos.has_next %}
+		<li><a href="/proyecto/page/{{proyectos.next_page_number }}/"> Next </a></li>
+	{% else %}
+		<li><a href="#"> Next </a></li>
+	{% endif %}
+		<li><a href="/proyecto/page/{{proyectos.paginator.num_pages }} "> >> </a><li>
+	</ul>
+	</div>
+	<br><br>
+	<center><span class="badge badge-info"> Pagina {{ proyectos.number }} de {{ proyectos.paginator.num_pages }}</span></center>
+{% endif %}
+
+<!--<pre class="literal-block">
+ tag para agregar un bloc  a nuestra pagina web
+</pre>-->
+
+	
+
+	{% endblock  %}

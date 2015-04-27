@@ -1,0 +1,40 @@
+{% extends 'base3.html' %}
+{% block title %} Empleados {{empleado.nombre}} {% endblock  %}
+
+
+{%  block content %}
+   <h2><p align="center" class="text-info"> Lista de Empleados </p></h2>
+	<span class="label label-success">Nombre:</span> 
+	<h6> <p class="text-info"> {{empleado.nombre}}</p> </h6>
+	<img class="img-polaroid" src="/media/{{empleado.imagen}}  " width="150px" heigth="150px"/>
+  <br>
+  <br>
+  <hr>
+  <span class="label label-success">Apellido Paterno:</span> 
+   <p class="text-info">  {{empleado.apellidop}}  </p>
+   <hr>
+   <span class="label label-success">Apellido Materno:</span> 
+    <p class="text-info">  {{empleado.apellidom}} </p>
+    <hr>
+    <span class="label label-success">Direccion:</span> 
+    <p class="text-info">  {{empleado.direccion}} </p>
+    <hr>
+    <span class="label label-success">Codigo Postal:</span> 
+    <p class="text-info">  {{empleado.zip}} </p>
+    <hr>
+    <span class="label label-success">Sexo:</span> 
+    <p class="text-info">  {{empleado.sexo}} </p>
+    <br>
+    <hr>
+  <h5><p align="center" class="text-info"> Departamentos</p></h5>
+  {% for dep  in departamentos %}
+  <span class="label label-info"> {{dep.nombre}} </span>
+  {% endfor %}
+
+
+
+  <br>
+  <br>
+  <a class="btn btn-primary" href="javascript:window.history.go(-1) ">Regresar Lista de Empleados</a>
+
+	{% endblock  %}

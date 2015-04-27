@@ -1,0 +1,29 @@
+{% extends 'base3.html' %}
+{% block title %} Contactanos {% endblock %}
+
+{% block content %}
+<center><h2> <font color="black">Contacto</font></h2></center>
+ <center><h4> <font color="white"><small>Contactanos! <cite title="@rgusbemus">
+ 	"Por cualquier duda, mandanos un correo electronico nosotros te respondemos a la brevedad"</cite></small></font></h4></center>
+
+	{% if info_enviado %}
+	   Gracias por enviar un comentario
+
+	   <br>
+	    La informacion recibida fue la siguiente
+	    <p class="text-info">Email: {{email}}</p>
+	    <p class="text-info">Titulo: {{titulo}} </p>
+	    <p class="text-info">Texto:  </p><br><H2>{{texto}}</H2>
+	    
+	 {% else %}  
+
+	
+	<form action="." method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<button class="btn btn-primary" type="submit"> Enviar </button>
+
+	</form>
+	{% endif %}
+
+	{%  endblock%}

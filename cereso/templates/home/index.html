@@ -1,0 +1,26 @@
+{% extends 'base2.html' %}
+
+{% block title %} @argusBemus{% endblock %}
+
+{% block content %} 
+ 
+ <center><h2> <font color="white">Desarrollando Software Facil</font></h2></center>
+ <center><h4> <font color="white"><small>Programamos <cite title="@rgusbemusoft">
+ 	"Para que puedas desarrollar software de calidad y de una manera facil"</cite></small></font></h4></center>
+
+  
+
+{% if user.is_authenticated %}
+
+    <p>Bienvenido {{user.username}} </p>
+
+    
+
+
+ 
+{% endif %}
+
+
+
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends 'base3.html' %}
+
+{% block title%} Editar Empleado {% endblock %}
+
+  {% block content %} 
+
+	<H2> Lista editar empleado</H2>
+<div class="row">
+	<div class="spand">
+<form action="." method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="btn btn-primary" type="submit"> Grabar </button>
+	<button class="btn btn-primary" type="submit"> Limpiar </button>
+
+</form>
+<div class="spand5">
+	<img src="/media/{{empleado.imagen}} "/>
+</div>
+
+</div>
+
+</div>
+
+{{informacion}}
+<br>
+<hr>
+
+
+<a class="submit"  href="javascript:window.history.go(-1) ">Regresar Lista de Empleados</a>
+
+	
+{% endblock %}
